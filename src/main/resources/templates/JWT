@@ -1,0 +1,25 @@
+JWT stands for Json Web Token.
+
+JWT is mostly used for securing Rest APIs.
+
+Communicate b/w client and server securely.
+
+JWT without storing any data on server.(follows stateless authentication).
+
+TOKEN = HEADER (Algo + TokenType) + PAYLOAD (Information about claims) + SIGNATURE (encode header + encoded payload + key)
+
+Steps to impelement JWT
+
+1- Add dependency(io.jsonwebtoken).
+2- Create JWT authenticationEntryPoint implements AuthemticationEntryPoint.
+3- JWTTokenHelper --> Methods ---> tokens operations.
+4- JwtAuthenticationFilter extends OnceRequestFilter.
+	i- Get jwt token from request.
+	ii- Validate token.
+	iii- Get user from token.
+	iv- Load user associated with token.
+	v- Set spring security.
+5- Create JwtAuthResponse.
+6- Configure JWT in spring security config.
+7- Create login api to return token.
+8- Test the application.
