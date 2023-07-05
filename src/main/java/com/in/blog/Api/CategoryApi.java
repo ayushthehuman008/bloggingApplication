@@ -36,7 +36,7 @@ public class CategoryApi {
 	}
 	
 	//update
-	@PutMapping("/{categoryId}")
+	@PutMapping("/{categoryId}") //{categoryId} --> this is a URI variable 
 	public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto, @PathVariable Integer categoryId)
 	{
 		CategoryDto updatedCategory = this.categoryService.updateCategory(categoryDto, categoryId);

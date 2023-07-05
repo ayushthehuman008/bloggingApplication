@@ -32,14 +32,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		
-		
-		
-		
+
 		//1. get token
 		
 		String requestToken = request.getHeader("Authorization");
 		
-		//Bearer 2352523sdgsg
+		//FORMAT OF TOKEN -- > Bearer 2352523sdgsg
 		
 		System.out.println(requestToken);
 		

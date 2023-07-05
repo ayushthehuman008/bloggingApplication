@@ -27,7 +27,7 @@ public class Application implements CommandLineRunner{
 		SpringApplication.run(Application.class, args);
 	}
 	
-	@Bean  // create automatic object
+	@Bean  // it is used to create automatic object
 	public ModelMapper modelMapper() 
 	{
 		return new ModelMapper();
@@ -36,7 +36,6 @@ public class Application implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		System.out.println(this.passwordEncoder.encode("12345"));
 		
 		try
 		{
@@ -54,6 +53,7 @@ public class Application implements CommandLineRunner{
 			
 			result.forEach(r->{
 				System.out.println(r.getName());
+				
 			});
 			
 		}

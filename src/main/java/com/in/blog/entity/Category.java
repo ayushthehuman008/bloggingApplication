@@ -13,8 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.NoArgsConstructor;
+
+
 @Entity
 @Table(name = "catogires")
+@NoArgsConstructor
 public class Category {
 
 	@Id
@@ -26,21 +30,21 @@ public class Category {
 	
 	@Column(name = "description")
 	private String CategoryDescription;
-	
-	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+		
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY) //One Category contains many posts.
 	private List<Post> posts = new ArrayList<>();
+																						//FetchType.LAZY means remove parent but not child.
 	
-	
-	public Category(Integer categoryId, String categoryTitle, String categoryDescription) {
-		super();
-		this.categoryId = categoryId;
-		this.categoryTitle = categoryTitle;
-		CategoryDescription = categoryDescription;
-	}
+//	public Category(Integer categoryId, String categoryTitle, String categoryDescription) {
+//		super();
+//		this.categoryId = categoryId;
+//		this.categoryTitle = categoryTitle;
+//		CategoryDescription = categoryDescription;
+//	}
 
-	public Category() {
-		super();
-	}
+//	public Category() {
+//		super();
+//	}
 
 	public Integer getCategoryId() {
 		return categoryId;

@@ -15,7 +15,6 @@ public interface PostRepo extends JpaRepository<Post, Integer>
 	
 	//These all are manually created methods
 	
-	
 	List<Post> findByUser(User user);  
 	
 	List<Post> findByCategory(Category category);

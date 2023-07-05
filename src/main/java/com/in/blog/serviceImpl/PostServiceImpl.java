@@ -112,9 +112,7 @@ public class PostServiceImpl implements PostService
 		
 		Pageable p = PageRequest.of(pageNumber, pageSize, sort);  //Sort.by(sortBy).descending()
 		
-		//PageDtoToPage
 		Page<Post> pagePost = this.postRepo.findAll(p);
-		
 		
 		//PageDtoToPage
 		List<Post> posts = pagePost.getContent();

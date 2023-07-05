@@ -26,7 +26,7 @@ public class UserDto {
 	private String email;
 	
 	@NotEmpty
-	@Size(min = 4, max = 8, message = "Password must ber in 4 and max 8")
+	@Size(min = 4, max = 8, message = "Password must be in 4 and max 8")
 	//@Pattern(regexp = "", message = "Follow the pattern")
 	private String password;
 	

@@ -12,26 +12,27 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-@Component
+@Component //so that we can easily autowired
 public class JwtTokenHelper {
 
-	public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+	public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60; // this is our token validity
 	
 	private String secret = "jwtTokenKey";
 	
 	
 	//retrieve username from jwt token
-	public String getUsernameFromToken(String token)
+	public String getUsernameFromToken(String token) //by token we can get the username
 	{
 		return getClaimFromToken(token, Claims::getSubject);
 	}
 	
 	//reterive expiration date from jwt token
-	public Date getExpirationDateFromToken(String token)
+	public Date getExpirationDateFromToken(String token)//by token we can get the expirationDate of the token
 	{
 		return getClaimFromToken(token, Claims::getExpiration);
 	}
 	
+	//By token we can get the claim of the token
 	public<T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver)
 	{
 		final Claims claims = getAllClaimsFromToken(token);
@@ -57,6 +58,7 @@ public class JwtTokenHelper {
 		Map<String, Object> claims = new HashMap<>();
 		return doGenerateToken(claims, userDetails.getUsername());
 	}
+	
 	
 	private String doGenerateToken(Map<String, Object> claims, String subject)
 	{

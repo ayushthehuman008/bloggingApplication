@@ -33,11 +33,11 @@ public class Post {
 	
 	private Date addedDate;
 	 
-	@ManyToOne
-	@JoinColumn(name = "category_id")
+	@ManyToOne //Many post in one category
+	@JoinColumn(name = "category_id") 
 	private Category category;
 	
-	@ManyToOne
+	@ManyToOne //Many post is created by one user
 	private User user;
 	
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)

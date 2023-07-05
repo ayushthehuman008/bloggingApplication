@@ -68,7 +68,6 @@ public class UserApi
 	
 	//ADMIN
 	//DELETE - delete user
-	
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<ApiResponse> deleteUser(@PathVariable Integer userId)

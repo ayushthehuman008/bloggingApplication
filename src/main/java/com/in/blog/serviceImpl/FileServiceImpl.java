@@ -20,11 +20,11 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public String uploadImage(String path, MultipartFile file) throws IOException {
 		
-		//File name
+		//First find File name
 		String name = file.getOriginalFilename();
 		
 		//random name generate file
-		String randomId = UUID.randomUUID().toString();
+		String randomId = UUID.randomUUID().toString();  // UUID will generate random string.
 		String fileName1 = randomId.concat(name.substring(name.lastIndexOf(".")));
 		
 		//Full path
@@ -34,14 +34,14 @@ public class FileServiceImpl implements FileService {
 		File f = new File(path);
 		if(!f.exists())
 		{
-			f.mkdir();
+			f.mkdir(); //create our folder
 		}
 		
 		//file copy
 		Files.copy(file.getInputStream(), Paths.get(filePath));
 		
-		return name;
 		//return fileName1;
+		return name;
 	}
 
 	@Override

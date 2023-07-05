@@ -25,7 +25,7 @@ import com.in.blog.security.JwtAuthenticationEntryPoint;
 import com.in.blog.security.JwtAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity //for enabling web security 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebMvc
 
@@ -56,10 +56,8 @@ public class SecurityConfig{
 		.csrf()
 		.disable()
 		.authorizeHttpRequests()
-//		.antMatchers("/api/v1/auth/**").permitAll()
-//		.antMatchers("/v3/api-docs").permitAll()
-		.antMatchers(PUBLIC_URLS).permitAll()
-		.antMatchers(HttpMethod.GET).permitAll() 
+		.antMatchers(PUBLIC_URLS).permitAll() // it is used to make the API publically accessable 
+		.antMatchers(HttpMethod.GET).permitAll()//this means that the all the GET API is publically accessable
 		.anyRequest()
 		.authenticated()
 		.and()

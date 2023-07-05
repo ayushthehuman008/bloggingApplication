@@ -1,6 +1,7 @@
 package com.in.blog.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -35,22 +36,21 @@ public class UserServiceImpl implements UserService
 	@Autowired
 	private RoleRepo roleRepo;
 	
-	
+	//this is done by the model mapper class.
 	@Override
 	public UserDto createUser(UserDto userDto) 
 	{
-		 
-		//User user = this.dtoToUser(userDto);
 		
 		//DtoToUser
 		User user = this.modelMapper.map(userDto, User.class);
-		
 		
 		User savedUser = this.userRepo.save(user);
 		
 		//UserToDto
 		return this.modelMapper.map(savedUser, UserDto.class);
 	}
+	
+//	Converting from userDto to User entity MANUALLY
 	
 	/*
 	 * public User dtoToUser(UserDto userDto) { 
@@ -66,20 +66,18 @@ public class UserServiceImpl implements UserService
 	 * return user; }
 	 */
 	
-//	public UserDto userToDto(User user) 
-//	{
-//		UserDto userdto = this.modelMapper.map(user, UserDto.class);
-//		
-////		UserDto userdto = new UserDto();
-////		userdto.setName(user.getName());
-////		userdto.setEmail(user.getEmail());
-////		userdto.setId(user.getId());
-////		userdto.setAbout(user.getAbout());
-////		userdto.setPassword(user.getPassword());
-//		
-//		
-//		return userdto;
-//	}
+//	Converting from user entity to userDto MANUALLY
+	
+	/*
+	 * public UserDto userToDto(User user) { UserDto userdto =
+	 * this.modelMapper.map(user, UserDto.class);
+	 * 
+	 * UserDto userdto = new UserDto(); userdto.setName(user.getName());
+	 * userdto.setEmail(user.getEmail()); userdto.setId(user.getId());
+	 * userdto.setAbout(user.getAbout()); userdto.setPassword(user.getPassword());
+	 * 
+	 * return userdto; }
+	 */
 
 	@Override
 	public UserDto updateUser(UserDto userDto, Integer userId) 
@@ -144,19 +142,28 @@ public class UserServiceImpl implements UserService
 	@Override
 	public UserDto registerNewUser(UserDto userDto) {
 		
+		//UserToUserDto
 		User user = this.modelMapper.map(userDto, User.class);
 		
 		//encoded the password
 		user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 		
-		//roles
-		Role role = this.roleRepo.findById(AppConstants.NORMAL_USER).get();
+		//fetching the role of user (NORMAL_USER)
+		//Role role = this.roleRepo.findById(AppConstants.NORMAL_USER).get();
 		
-		user.getRoles().add(role);
+		//fetching the role of user (ADMIN_USER)
+		Role role1 = this.roleRepo.findById(AppConstants.ADMIN_USER).get();
+		
+		//setting the role to the user (NORMAL_USER)
+		//user.getRoles().add(role);
+		
+		//setting the role to the user (ADMIN_USER)
+		user.getRoles().add(role1);
 		
 		User newUser = this.userRepo.save(user);
 		
 		return this.modelMapper.map(newUser, UserDto.class);
 	}
+
 
 }

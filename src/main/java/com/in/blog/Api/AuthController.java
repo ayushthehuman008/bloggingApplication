@@ -35,8 +35,19 @@ public class AuthController
 	
 	@Autowired
 	private UserService userService;
-	//create token
 	
+	
+	//register new user
+		@PostMapping("/register")
+		public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto)
+		{
+			UserDto registeredUser = this.userService.registerNewUser(userDto);
+			return new ResponseEntity<UserDto>(registeredUser, HttpStatus.CREATED);
+			
+		}
+		
+		
+	//create token
 	@PostMapping("/login")
 	public ResponseEntity<JwtAuthResponse> createToken
 	(@RequestBody JwtAuthRequest request) throws Exception
@@ -52,6 +63,7 @@ public class AuthController
 		return new ResponseEntity<JwtAuthResponse>(response, HttpStatus.OK);
 	}
 
+	//by this method we can authenticate the user that he/she is providing the correct username and password or not.
 	private void authenticate(Object username, Object password) throws Exception{
 		
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
@@ -67,12 +79,4 @@ public class AuthController
 		}
 	}
 	
-	//register new user
-	@PostMapping("/register")
-	public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto)
-	{
-		UserDto registeredUser = this.userService.registerNewUser(userDto);
-		return new ResponseEntity<UserDto>(registeredUser, HttpStatus.CREATED);
-		
-	}
 }

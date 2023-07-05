@@ -53,7 +53,7 @@ public class PostApi {
 		return new ResponseEntity<PostDto>(createPost, HttpStatus.CREATED);
 	}
 	
-	//get by user  ---> use pagination and sorting
+	//get by user
 	
 	@GetMapping("/user/{userId}/posts")
 	public ResponseEntity<List<PostDto>> getPostsByUser(@PathVariable Integer userId)
@@ -62,7 +62,7 @@ public class PostApi {
 		return new ResponseEntity<List<PostDto>>(posts, HttpStatus.OK);
 	}
 	
-	//get by category  ---> use pagination and sorting
+	//get by category 
 	
 	@GetMapping("/category/{categoryId}/posts")
 	public ResponseEntity<List<PostDto>> getPostsByCategory(@PathVariable Integer categoryId)

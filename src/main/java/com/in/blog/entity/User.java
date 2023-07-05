@@ -36,12 +36,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class User implements UserDetails {
 
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -52,16 +46,13 @@ public class User implements UserDetails {
 	private String password;
 	private String about;
 
-	
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // One user can do multiple posts
 	private List<Post> posts = new ArrayList<>();
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "user", referencedColumnName = "id"),
 	inverseJoinColumns = @JoinColumn(name = "role", referencedColumnName = "id"))
 	private Set<Role> roles = new HashSet<>();
-	
 	
 	public int getId() {
 		return id;

@@ -1,4 +1,4 @@
-package com.in.blog.serviceImpl;
+ package com.in.blog.serviceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -44,8 +44,6 @@ public class CategoryServiceImpl implements CategoryService {
 		Category category = this.categoryRepo.findById(categoryId)
 				.orElseThrow(()-> new ResourceNotFoundException("Category", "CategoryId", categoryId));
 		
-		//category.setCategoryId(categoryDto.getCategoryId());
-		
 		//CategoryDtoToCategory
 		category.setCategoryDescription(categoryDto.getCategoryDescription());
 		category.setCategoryTitle(categoryDto.getCategoryTitle());
@@ -64,12 +62,12 @@ public class CategoryServiceImpl implements CategoryService {
 		
 		Optional<Category> category = this.categoryRepo.findById(categoryId);
 		Category cat = category.orElseThrow(()-> new ResourceNotFoundException("Category", "CategoryId", categoryId));
-		
-		return this.modelMapper.map(cat, CategoryDto.class);
 		/*
 		CategoryDto categorydto = this.modelMapper.map(cat, CategoryDto.class);
 		return categorydto;
 		*/
+		return this.modelMapper.map(cat, CategoryDto.class);
+		
 	}
 
 	@Override
@@ -92,21 +90,5 @@ public class CategoryServiceImpl implements CategoryService {
 		this.categoryRepo.delete(cat);
 
 	}
-	
-	/*
-	 * public Category categoryDtoTOCategory(CategoryDto categoryDto) { Category
-	 * category = this.modelMapper.map(categoryDto, Category.class); return
-	 * category;
-	 * 
-	 * }
-	 */
-	
-	/*
-	 * public CategoryDto categoryTOCategoryDto(Category category) { CategoryDto
-	 * categoryDto = this.modelMapper.map(category, CategoryDto.class); return
-	 * categoryDto;
-	 * 
-	 * }
-	 */
 
 }
